@@ -8,4 +8,18 @@
     <string name="sign_in">SIGN IN</string>
     <string name="new_here">new here?</string>
     <string name="create_new_account">CREATE NEW ACCOUNT</string>
+    <string name="error_while_loading_data">Error while loading data</string>
+    <string name="creator">Creator</string>
+    <string name="todo">TODO</string>
+    <string name="description">Description</string>
+    <string name="title">Title</string>
+    <string name="read">READ</string>
+    <string name="next"><![CDATA[>]]></string>
+    <string name="previous"><![CDATA[<]]></string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="change_password">Change Password</string>
+    <string name="logout">LogOut</string>
+    <string name="register">REGISTER</string>
+    <string name="last_names">Last Name</string>
 </resources>

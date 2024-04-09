@@ -11,17 +11,13 @@ import com.ubaya.utsanmp160421055.R
 
 class GamelistFragment : Fragment() {
 
-    override fun onResume() {
-        super.onResume()
-        (requireActivity() as AppCompatActivity).supportActionBar?.title = "Login"
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_game_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_game_list, container, false)
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = "Game News"
+        return view
     }
 
 }

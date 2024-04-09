@@ -9,14 +9,15 @@ import androidx.appcompat.app.AppCompatActivity
 import com.ubaya.utsanmp160421055.R
 
 
-class LoginFragment : Fragment() {
+class ProfileFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_login, container, false)
-        (requireActivity() as AppCompatActivity).supportActionBar?.title = "Login"
+        val view = inflater.inflate(R.layout.fragment_profile, container, false)
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = "Profile"
         return view
     }
+
 }
