@@ -27,10 +27,18 @@
         <action
             android:id="@+id/actionItemHome"
             app:destination="@id/ItemHome" />
+        <action
+            android:id="@+id/actionregisterFragment"
+            app:destination="@id/registerFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameDetailFragment"
         android:name="com.ubaya.utsanmp160421055.view.GameDetailFragment"
         android:label="fragment_game_detail"
         tools:layout="@layout/fragment_game_detail" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.ubaya.utsanmp160421055.view.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" />
 </navigation>
