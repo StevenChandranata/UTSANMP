@@ -25,7 +25,7 @@ class GameViewModel (application: Application): AndroidViewModel(application)
         gameLoadErrorLD.value = false
 
         queue = Volley.newRequestQueue(getApplication())
-        val url = "http://10.0.2.2/utsanmp/gameNewsDetail.php"
+        val url = "http://10.0.2.2/utsanmp/gameNews.php"
 
         val stringRequest = StringRequest(
             Request.Method.GET, url,

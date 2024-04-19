@@ -26,14 +26,12 @@ class userViewModel (application: Application): AndroidViewModel(application){
         val loadingLD = MutableLiveData<Boolean>()
         val TAG = "volleyTag"
         private var queue: RequestQueue? = null
-
         fun login() {
             loadingLD.value = true
             userLoadErrorLD.value = false
 
             queue = Volley.newRequestQueue(getApplication())
             val url = "http://10.0.2.2/utsanmp/user.php"
-
             val stringRequest = StringRequest(
                 Request.Method.GET, url,
                 {
@@ -53,7 +51,6 @@ class userViewModel (application: Application): AndroidViewModel(application){
             stringRequest.tag = TAG
             queue?.add(stringRequest)
         }
-
     fun checkCredentials(username: String, password: String): Boolean {
         val userList = userLD.value
         if (userList != null) {
@@ -68,7 +65,6 @@ class userViewModel (application: Application): AndroidViewModel(application){
     fun setCurrentUser(user: User) {
         currentUserLD.value = user
     }
-
     fun getCurrentUser(): User? {
         return currentUserLD.value
     }
@@ -79,7 +75,6 @@ class userViewModel (application: Application): AndroidViewModel(application){
         }
         return null
     }
-
     fun updateUserProfile(newFirstName: String, newLastName: String, newPassword: String, username: String) {
         val url = "http://10.0.2.2/utsanmp/updateUser.php"
         val requestQueue = Volley.newRequestQueue(getApplication())
@@ -101,7 +96,6 @@ class userViewModel (application: Application): AndroidViewModel(application){
         }
         requestQueue.add(stringRequest)
     }
-
     fun registerUser(context: Context, username: String, firstname: String, lastname: String, email: String, password: String, imageProfil:String) {
         val url = "http://10.0.2.2/utsanmp/insertUser.php"
         val request = object : StringRequest(
@@ -128,7 +122,6 @@ class userViewModel (application: Application): AndroidViewModel(application){
         }
         Volley.newRequestQueue(context).add(request)
     }
-
     override fun onCleared() {
             super.onCleared()
             queue?.cancelAll(TAG)

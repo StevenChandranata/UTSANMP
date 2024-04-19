@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -24,6 +25,7 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = "Profile"
         return binding.root
     }
 
@@ -31,26 +33,25 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         uViewModel = ViewModelProvider(requireActivity()).get(userViewModel::class.java)
-
-        // Observe changes to currentUserLD
         uViewModel.currentUserLD.observe(viewLifecycleOwner) { currentUser ->
             if (currentUser != null) {
                 updateUI(currentUser)
             }
         }
-
-        // Button click listeners
         binding.btnSave.setOnClickListener {
-            val newFirstName = binding.txtChangeFirstName.text.toString()
-            val newLastName = binding.txtChangeLastName.text.toString()
-            val newPassword = binding.txtChangePassword.text.toString()
-
-            val currentUser = uViewModel.getCurrentUser()
-            currentUser?.let {
-                val username = it.username
-                if (username != null) {
-                    uViewModel.updateUserProfile(newFirstName, newLastName, newPassword, username)
+            val newFirstName = binding.txtChangeFirstName?.text.toString()
+            val newLastName = binding.txtChangeLastName?.text.toString()
+            val newPassword = binding.txtChangePassword?.text.toString()
+            if (newFirstName.isNotEmpty() && newLastName.isNotEmpty() && newPassword.isNotEmpty()) {
+                val currentUser = uViewModel.getCurrentUser()
+                currentUser?.let {
+                    val username = it.username
+                    if (username != null) {
+                        uViewModel.updateUserProfile(newFirstName, newLastName, newPassword, username)
+                    }
                 }
+            } else {
+                Toast.makeText(requireContext(), "Your Profile Credential Cant Be Empty!", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -59,7 +60,6 @@ class ProfileFragment : Fragment() {
             Navigation.findNavController(it).navigate(action)
         }
     }
-
     private fun updateUI(currentUser: User) {
         Picasso.get()
             .load(currentUser.imageProfil)
