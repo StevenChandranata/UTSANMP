@@ -12,13 +12,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.ubaya.utsanmp160421055.R
 import com.ubaya.utsanmp160421055.databinding.FragmentLoginBinding
 import com.ubaya.utsanmp160421055.viewmodel.userViewModel
-
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
-    private lateinit var ViewModel: userViewModel
+    private lateinit var uViewModel: userViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,29 +26,34 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
-        val view = binding.root
         (requireActivity() as AppCompatActivity).supportActionBar?.title = "Login"
         val createAccountTextView = binding.buttonTextView
         createAccountTextView.setOnClickListener {
             findNavController().navigate(R.id.actionregisterFragment)
         }
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ViewModel = ViewModelProvider(requireActivity()).get(userViewModel::class.java)
-        ViewModel.refresh()
+        uViewModel = ViewModelProvider(requireActivity()).get(userViewModel::class.java)
+        uViewModel.login()
+
         binding.btnSignIn.setOnClickListener {
             val username = binding.txtUsername.text.toString()
             val password = binding.txtpassword.text.toString()
 
-            if (ViewModel.checkCredentials(username, password)) {
-                val action = LoginFragmentDirections.actionItemHome()
-                Navigation.findNavController(it).navigate(action)
+            if (uViewModel.checkCredentials(username, password)) {
+                val currentUser = uViewModel.getCurrentUserByUsername(username)
+                if (currentUser != null) {
+                    uViewModel.setCurrentUser(currentUser)
+                    val action = LoginFragmentDirections.actionItemHome()
+                    Navigation.findNavController(it).navigate(action)
+                    binding.txtUsername.text?.clear()
+                    binding.txtpassword.text?.clear()
+                }
             } else {
-                Toast.makeText(requireContext(), "Invalid username or password", Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(requireContext(), "Invalid username or password", Toast.LENGTH_SHORT).show()
             }
         }
     }
