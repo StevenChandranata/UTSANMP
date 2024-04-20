@@ -21,11 +21,28 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.hostFragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.hostFragment) as NavHostFragment
         navController = navHostFragment.navController
+        if (navController.currentDestination?.id == R.id.loginFragment) {
+            binding.navView.visibility = View.GONE
+            binding.bottomNav.visibility = View.GONE
+        }
+
+        setupNavigation()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return NavigationUI.navigateUp(navController, binding.drawerLayout)
+                || super.onSupportNavigateUp()
+    }
+
+    private fun setupNavigation() {
         NavigationUI.setupActionBarWithNavController(this, navController, binding.drawerLayout)
         NavigationUI.setupWithNavController(binding.navView, navController)
+
         binding.bottomNav.setupWithNavController(navController)
+
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.loginFragment || destination.id == R.id.registerFragment) {
                 binding.navView.visibility = View.GONE
@@ -35,10 +52,5 @@ class MainActivity : AppCompatActivity() {
                 binding.bottomNav.visibility = View.VISIBLE
             }
         }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        return NavigationUI.navigateUp(navController, binding.drawerLayout)
-                || super.onSupportNavigateUp()
     }
 }

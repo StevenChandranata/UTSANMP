@@ -22,4 +22,7 @@
     <string name="logout">LogOut</string>
     <string name="register">REGISTER</string>
     <string name="last_names">Last Name</string>
+    <string name="save">Save</string>
+    <string name="email">Email</string>
+    <string name="userName">Username</string>
 </resources>
