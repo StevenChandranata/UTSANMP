@@ -48,6 +48,10 @@ class ProfileFragment : Fragment() {
                     val username = it.username
                     if (username != null) {
                         uViewModel.updateUserProfile(newFirstName, newLastName, newPassword, username)
+                        currentUser.firstname = newFirstName
+                        currentUser.lastname = newLastName
+                        currentUser.password = newPassword
+                        uViewModel.setCurrentUser(currentUser)
                     }
                 }
             } else {

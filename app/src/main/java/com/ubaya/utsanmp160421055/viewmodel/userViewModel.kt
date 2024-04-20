@@ -80,7 +80,7 @@ class userViewModel (application: Application): AndroidViewModel(application){
         val requestQueue = Volley.newRequestQueue(getApplication())
         val stringRequest = object : StringRequest(Method.POST, url,
             Response.Listener { response ->
-                Toast.makeText(getApplication(), response, Toast.LENGTH_SHORT).show()
+                Toast.makeText(getApplication(), "Profile user Updated!", Toast.LENGTH_SHORT).show()
             },
             Response.ErrorListener { error ->
                 Toast.makeText(getApplication(), "Error occurred: ${error.message}", Toast.LENGTH_SHORT).show()

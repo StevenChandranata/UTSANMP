@@ -2,10 +2,10 @@ package com.ubaya.utsanmp160421055.model
 import com.google.gson.annotations.SerializedName
 data class User(
     val username:String?,
-    val firstname:String?,
-    val lastname:String?,
+    var firstname:String?,
+    var lastname:String?,
     val email:String?,
-    val password:String?,
+    var password:String?,
     @SerializedName("imageProfil") val imageProfil: String?
 )
 data class Game(
