@@ -161,7 +161,7 @@
             android:layout_width="357dp"
             android:layout_height="61dp"
             android:layout_marginStart="27dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="17dp"
             android:layout_marginEnd="27dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

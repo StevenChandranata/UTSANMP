@@ -122,6 +122,10 @@ class userViewModel (application: Application): AndroidViewModel(application){
         }
         Volley.newRequestQueue(context).add(request)
     }
+    fun isUserLogIn(): Boolean {
+        return userLD.value != null && userLD.value!!.isNotEmpty() && !userLD.value!![0].id.isNullOrEmpty()
+
+    }
     override fun onCleared() {
             super.onCleared()
             queue?.cancelAll(TAG)

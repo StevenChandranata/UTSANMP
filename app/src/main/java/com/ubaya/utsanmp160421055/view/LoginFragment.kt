@@ -19,7 +19,10 @@ import com.ubaya.utsanmp160421055.viewmodel.userViewModel
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var uViewModel: userViewModel
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(false)
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,8 +40,9 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         uViewModel = ViewModelProvider(requireActivity()).get(userViewModel::class.java)
+        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        setHasOptionsMenu(true)
         uViewModel.login()
-
         binding.btnSignIn.setOnClickListener {
             val username = binding.txtUsername.text.toString()
             val password = binding.txtpassword.text.toString()
@@ -49,6 +53,7 @@ class LoginFragment : Fragment() {
                     uViewModel.setCurrentUser(currentUser)
                     val action = LoginFragmentDirections.actionItemHome()
                     Navigation.findNavController(it).navigate(action)
+                    Toast.makeText(requireContext(), "Success!", Toast.LENGTH_SHORT).show()
                     binding.txtUsername.text?.clear()
                     binding.txtpassword.text?.clear()
                 }

@@ -1,6 +1,7 @@
 package com.ubaya.utsanmp160421055.model
 import com.google.gson.annotations.SerializedName
 data class User(
+    val id:String?,
     val username:String?,
     var firstname:String?,
     var lastname:String?,
